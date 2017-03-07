@@ -1,0 +1,9 @@
+<div>
+	<h1 ng-show="noRecipes">No recipes to display</h1>
+	<ul>
+		<li ng-repeat="recipe in recipes">
+			<recipe-thumbnail recipe="recipe" />
+		</li>
+	</ul>
+	<button class="btn btn-default" ng-click="launchAddRecipe()">Add a recipe</button>
+<div>

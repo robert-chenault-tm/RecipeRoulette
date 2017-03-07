@@ -1,0 +1,58 @@
+<div>
+	<h1>{{title}}</h1>
+	<br />
+	<form name="recipeForm">
+		<fieldset>
+			<label for="name">Name: </label>
+			<input id="name" type="text" required ng-model="recipe.recipeName" placeholder="Name..."></input>
+			<br />
+			<b>Preparation Time:</b>
+			<input type="text" required ng-model="recipe.prepTime.hours" placeholder="Hours..."></input> hours
+			<input type="text" required ng-model="recipe.prepTime.minutes" placeholder="Minutes..."></input> minutes
+			<br />
+			<b>Cook Time:</b>
+			<input type="text" required ng-model="recipe.cookTime.hours" placeholder="Hours..."></input> hours
+			<input type="text" required ng-model="recipe.cookTime.minutes" placeholder="Minutes..."></input> minutes
+			<br />
+			<b>Ingredients:</b>
+			<button type="button" style="margin-left: 17.5%" class="btn btn-default" ng-click="addNewIngredientRow()">+</button>
+			<br />
+			<div id="ingredientList">
+				<div ng-repeat="ingredient in recipe.ingredients">
+					<input type="text" required ng-model="ingredient.amount" placeholder="Amount..."></input>
+					<input type="text" ng-model="ingredient.measurement" placeholder="Measurement..."></input>
+					<input type="text" required ng-model="ingredient.ingredient" placeholder="Ingredient..."></input>
+					<button type="button" class="btn btn-default" ng-click="removeIngredientRow(this)">X</button>
+				</div>
+			</div>
+			<b>Instructions:</b>
+			<div id="instructionList">
+				<div ng-repeat="step in recipe.steps">
+					<button type="button" class="btn btn-default" ng-click="upStepNumber(this)">Up</button>
+					<button type="button" class="btn btn-default" ng-click="downStepNumber(this)">Down
+					</button>
+					<input type="text" required ng-model="step.step" placeholder="Step..."></input>
+					<button type="button" class="btn btn-default" ng-click="addNewStepRow(this)">+</button>
+					<button type="button" class="btn btn-default" ng-click="removeStepRow(this)">X</button>
+				</div>
+			</div>
+			<b>Tags:</b>
+			<button type="button" style="margin-left: 17.5%" class="btn btn-default" ng-click="addNewTagRow()">+</button>
+			<div id="tagList">
+				<div ng-repeat="tag in recipe.tags">
+					<input type="text" ng-model="tag.val" placeholder="Tag..."></input>
+					<button type="button" class="btn btn-default" ng-click="removeTagRow(this)">X</button>
+				</div>
+			</div>
+			
+		
+		
+		</fieldset>
+		
+		<button class="btn btn-default" ng-click="saveRecipe(recipe, recipeForm)">Save</button>
+		<button class="btn btn-default" ng-click="deleteRecipe(recipe)" ng-show="removable">Delete</button>
+	
+	</form>
+
+
+</div>

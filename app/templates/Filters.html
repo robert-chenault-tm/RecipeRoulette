@@ -1,0 +1,19 @@
+<h1>Filters</h1>
+<br />
+Includes all of the tags:
+<button class="btn btn-default" ng-click="addTag('good')">+</button>
+<br />
+<div ng-repeat="tag in filter.goodTags">
+	<input type="text" ng-model="tag.val" placeholder="Tag..." />
+	<button class="btn btn-default" ng-click="removeTag(this, 'good')">X</button>
+</div>
+<br />
+Includes none of the tags:
+<button class="btn btn-default" ng-click="addTag('bad')">+</button>
+<br />
+<div ng-repeat="tag in filter.badTags">
+	<input type="text" ng-model="tag.val" placeholder="Tag..." />
+	<button class="btn btn-default" ng-click="removeTag(this, 'bad')">X</button>
+</div>
+<br />
+<button class="btn btn-default" ng-click="saveFilter(filter)">Save</button>
