@@ -1,9 +1,26 @@
 <div>
+	<form ng-submit="search()">
+		<input type="text" placeholder="Search..." ng-model="searchTermTemp"/>
+		<button type="submit">Search</button>
+	</form>
 	<h1 ng-show="noRecipes">No recipes to display</h1>
+	<br />
+	<label ng-show="!noRecipes">Results per page:</label>
+	<select ng-show="!noRecipes" ng-options="item as item for item in pageSizes" ng-model="perPage" ng-change="reQuery()"></select>
 	<ul>
-		<li ng-repeat="recipe in recipes">
+		<li ng-repeat="recipe in recipes | orderBy: 'recipeName'">
 			<recipe-thumbnail recipe="recipe" />
 		</li>
 	</ul>
+	<label ng-show="!noRecipes">Displaying results {{(currentPage - 1)*perPage + 1}} to {{(currentPage - 1)*perPage + recipes.length}}</label>
+	<br />
+	<div ng-show="!noRecipes">
+		<button class="btn btn-default" ng-click="goToPage(1)">First</button>
+		<button class="btn btn-default" ng-click="goToPage(currentPage - 1)">Previous</button>
+		<button class="btn btn-default" ng-click="goToPage(page)" ng-repeat="page in pages">{{page}}</button>
+		<button class="btn btn-default" ng-click="goToPage(currentPage + 1)">Next</button>
+		<button class="btn btn-default" ng-click="goToPage(pages.length+1)">Last</button>
+	</div>
+	<br />
 	<button class="btn btn-default" ng-click="launchAddRecipe()">Add a recipe</button>
 <div>

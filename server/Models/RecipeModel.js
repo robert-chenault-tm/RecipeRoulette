@@ -5,7 +5,7 @@ var recipeSchema = new Schema({
 	recipeName: String,
 	ingredients: [{ order: Number, amount: Number, measurement: String, ingredient: String }],
 	steps: [{ step: String, order: Number }],
-	tags: [{ val: String }],
+	instancesInShoppingList: Number,
 	prepTime: {
 		hours: Number,
 		minutes: Number

@@ -11,7 +11,6 @@ recipesApp.controller('EditRecipeController', function($scope, $routeParams, $lo
 				$scope.removable = true;
 			})
 			.catch(function(response){
-				//TODO Handle this
 				console.log(response);
 			});
 	} else {
@@ -31,31 +30,34 @@ recipesApp.controller('EditRecipeController', function($scope, $routeParams, $lo
 									'step': ''
 								}
 							],
-							'tags': [],
 							'prepTime': {
-								'amount': '',
-								'unit': ''
+								'hours': '',
+								'minutes': ''
 							},		
 							'cookTime': {
-								'amount': '',
-								'unit': ''
-							}
+								'hours': '',
+								'minutes': ''
+							},
+							'instancesInShoppingList': 0
 						};
 		$scope.origName = '';
 		$scope.removable = false;
 	}
-	
-		
+
 	$scope.saveRecipe = function(recipe, form) {
 		if(form.$valid) {
-			recipe.tags = recipe.tags.map(function(obj) {
-				obj.val = obj.val.toLowerCase();
-				return obj;
-			});
-			RecipeData.saveRecipe(recipe);
-			$location.url('/recipes');
-		}
-		
+			RecipeData.saveRecipe(recipe)
+			.$promise
+			.then(function(results) {
+				if(results.saved) {
+					$location.url('/recipes');
+				} else {
+					alert(results.results);
+				}
+			}).catch(function(response) {
+				console.log(response);
+			});	
+		}	
 	}
 	
 	$scope.addNewIngredientRow = function() {
@@ -113,9 +115,7 @@ recipesApp.controller('EditRecipeController', function($scope, $routeParams, $lo
 		} else {
 			steps[0].step = '';
 		}		
-	}
-	
-
+	}	
 	
 	$scope.upStepNumber = function(element) {
 		var steps = $scope.recipe.steps;
@@ -140,30 +140,6 @@ recipesApp.controller('EditRecipeController', function($scope, $routeParams, $lo
 				steps.splice(ind, 1);
 				steps.splice(ind + 1, 0, element.step);
 			}
-		}
-	}
-	
-	$scope.addNewTagRow = function() {
-		$scope.recipe.tags.push({
-			'val': ''
-		});
-	}	
-	
-	$scope.removeTagRow = function(element) {
-		var tags = $scope.recipe.tags;
-		var ind = tags.indexOf(element.tag);
-		if(ind == -1) {
-			console.log('Selected tag does not seem to be in the array of tags');
-		} else if(tags.length != 1) {
-			if(ind == 0) {
-				tags.shift();
-			} else if(ind == tags.length - 1) {
-				tags.pop();
-			} else {
-				tags.splice(ind, 1);
-			}
-		} else {
-			tags[0].val = '';
 		}
 	}
 	

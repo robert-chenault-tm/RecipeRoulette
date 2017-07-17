@@ -22,9 +22,9 @@ var recipesApp = angular.module('recipesApp', ['ngResource', 'ngRoute'])
 			templateUrl: 'templates/Roulette.html',
 			controller: 'RouletteController'
 		});
-		$routeProvider.when('/filter', {
-			templateUrl: 'templates/Filters.html',
-			controller: 'FiltersController'
+		$routeProvider.when('/shoppingList', {
+			templateUrl: 'templates/ShoppingList.html',
+			controller: 'ShoppingListController'
 		});
 		$routeProvider.otherwise({redirectTo: '/'});
 		$locationProvider.html5Mode(true);

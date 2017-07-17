@@ -1,0 +1,22 @@
+<div>
+	<h2>Recipes</h2>
+	<button type="button" ng-show="displayRecipeList" ng-click="toggleRecipeDisplay()">Hide</button>
+	<button type="button" ng-show="!displayRecipeList" ng-click="toggleRecipeDisplay()">Show</button>
+	<div ng-show="displayRecipeList">
+		<ul>
+			<li ng-repeat="recipe in recipes | orderBy: 'recipeName'">
+				<a ng-href="/recipe/{{recipe._id}}">{{recipe.recipeName}}{{generateCountString(recipe.instancesInShoppingList)}}</a>
+			</li>
+		</ul>
+	</div>
+	<h2>Ingredients</h2>
+	<button type="button" ng-show="displayIngredientList" ng-click="toggleIngredientDisplay()">Hide</button>
+	<button type="button" ng-show="!displayIngredientList" ng-click="toggleIngredientDisplay()">Show</button>
+	<div ng-show="displayIngredientList">
+		<ul>
+			<li ng-repeat="ingredient in ingredients | orderBy: 'ingredient'">
+				<label>{{ingredient.amount}} {{ingredient.measurement}} {{ingredient.ingredient}}</label>
+			</li>
+		</ul>
+	</div>
+</div>

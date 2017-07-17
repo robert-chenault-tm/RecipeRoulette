@@ -7,10 +7,9 @@ recipesApp.controller('RouletteController', function($scope, $routeParams, Recip
 				$scope.recipe = recipe;
 			})
 			.catch(function(response){
-				//TODO Handle this
 				console.log(response);
 			});
 	$scope.reRoulette = function() {
-		Roulette.recipeRoulette($scope.recipe._id);
+		Roulette.recipeRoulette();
 	}
 });

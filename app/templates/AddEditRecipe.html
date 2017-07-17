@@ -36,17 +36,8 @@
 					<button type="button" class="btn btn-default" ng-click="removeStepRow(this)">X</button>
 				</div>
 			</div>
-			<b>Tags:</b>
-			<button type="button" style="margin-left: 17.5%" class="btn btn-default" ng-click="addNewTagRow()">+</button>
-			<div id="tagList">
-				<div ng-repeat="tag in recipe.tags">
-					<input type="text" ng-model="tag.val" placeholder="Tag..."></input>
-					<button type="button" class="btn btn-default" ng-click="removeTagRow(this)">X</button>
-				</div>
-			</div>
-			
-		
-		
+			<input type="number" required ng-model="recipe.instancesInShoppingList"></input>
+			<label>instances of this recipe in the shopping list</label>
 		</fieldset>
 		
 		<button class="btn btn-default" ng-click="saveRecipe(recipe, recipeForm)">Save</button>
