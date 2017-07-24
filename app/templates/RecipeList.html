@@ -5,14 +5,18 @@
 	</form>
 	<h1 ng-show="noRecipes">No recipes to display</h1>
 	<br />
-	<label ng-show="!noRecipes">Results per page:</label>
+	<p style="display:inline-block" ng-show="!noRecipes">Results per page:</p>
 	<select ng-show="!noRecipes" ng-options="item as item for item in pageSizes" ng-model="perPage" ng-change="reQuery()"></select>
-	<ul>
-		<li ng-repeat="recipe in recipes | orderBy: 'recipeName'">
-			<recipe-thumbnail recipe="recipe" />
-		</li>
-	</ul>
-	<label ng-show="!noRecipes">Displaying results {{(currentPage - 1)*perPage + 1}} to {{(currentPage - 1)*perPage + recipes.length}}</label>
+	<table class="table table-striped">
+		<tbody>
+			<tr ng-repeat="recipe in recipes | orderBy: 'recipeName'">
+				<td>
+					<recipe-thumbnail recipe="recipe" />
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p ng-show="!noRecipes">Displaying results {{(currentPage - 1)*perPage + 1}} to {{(currentPage - 1)*perPage + recipes.length}}</p>
 	<br />
 	<div ng-show="!noRecipes">
 		<button class="btn btn-default" ng-click="goToPage(1)">First</button>
